@@ -1,0 +1,7 @@
+{
+  "name": "netty",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
