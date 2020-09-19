@@ -14,8 +14,8 @@ router.get('/reduction', function (req, res, next) {
 
 
     res.json([
-        {name: 'more efficient vehicle', tonsSaved: 2.2, dollarsSaved: '686', upfrontCosts: 2000},
-        {name: 'purchase electric vehicle', tonsSaved: 4.3, dollarsSaved: '922', upfrontCosts: 15000},
+        {name: 'Purchase more efficient vehicle', tonsSaved: 2.2, dollarsSaved: '686', upfrontCosts: 2000},
+        {name: 'Purchase electric vehicle', tonsSaved: 4.3, dollarsSaved: '922', upfrontCosts: 15000},
         {name: 'Work from home', tonsSaved: 1.2, dollarsSaved: '545', upfrontCosts: 0},
         {name: 'Ride my bike', tonsSaved: 0.5, dollarsSaved: '165', upfrontCosts: 0},
         {name: 'Take public transportation', tonsSaved: 0.4, dollarsSaved: '165', upfrontCosts: 0},
@@ -82,6 +82,7 @@ router.get('/transaction-data', (req, res, next) => {
             text: "Coop Pronto Dubendorfer.",
             location: "Zurich CH",
             category: "Groceries",
+            price: "12.25",
             carbon: 0.2,
             score: 0.7
         },
