@@ -20,6 +20,7 @@ export class TransactionService {
 
 
     getTransactions(): Observable<Transaction[]> {
+
         return this.fetchTransactions().pipe(
             map(transactions => {
                 return transactions.map(t => {
