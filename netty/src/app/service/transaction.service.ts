@@ -18,18 +18,22 @@ export class TransactionService {
     }
 
     async fetchTransactions() {
-        this.transactions = this.shuffle(
-            await this.http.get<TransactionDto[]>(`${environment.api}/classifier/transaction-data`).toPromise()
-        );
+        const trans = await this.http.get<TransactionDto[]>(`${environment.api}/classifier/transaction-data`).toPromise();
+        this.transactions = trans
+            .map(t => {
+                return {
+                    date: moment(t.date, 'DD.MM.YY').toDate(),
+                    text: t.text,
+                    location: t.location,
+                    category: t.category,
+                    price: Number.parseFloat(t.price),
+                    carbon: t.carbon,
+                    score: t.score,
+                };
+            })
+            .sort((a, b) => a.date.getTime() < b.date.getTime() ? -1 : 1);
     }
 
-    shuffle(a) {
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-    }
 
     getTransactions(): Observable<Transaction[]> {
         const interval$ = interval(250);
@@ -41,17 +45,7 @@ export class TransactionService {
                 if (i === this.transactions.length) {
                     die$.next();
                 }
-                return this.transactions.map(t => {
-                    return {
-                        date: moment(t.date, 'DD.MM.YY').toDate(),
-                        text: t.text,
-                        location: t.location,
-                        category: t.category,
-                        price: Number.parseFloat(t.price),
-                        carbon: t.carbon,
-                        score: t.score,
-                    };
-                }).slice(0, i).sort((a, b) => a.date.getTime() < b.date.getTime() ? 1 : -1);
+                return this.transactions.slice(0, i).sort((a, b) => a.date.getTime() < b.date.getTime() ? 1 : -1);
             }),
             startWith([])
         );

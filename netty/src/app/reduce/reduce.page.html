@@ -20,7 +20,7 @@
                     <div id="circle" class="circle">
                         <div>
                             <div class="icon" [ngClass]="icon(tip.proportion.category)"></div>
-                            <p>{{tip.proportion.percentage}}%</p>
+                            <p>{{tip.proportion.percentage | number: '1.0-0'}}%</p>
                         </div>
                     </div>
                 </div>
