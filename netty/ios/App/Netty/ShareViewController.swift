@@ -8,10 +8,16 @@ class ShareViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.handleSharedFile()
+
+ 
   }
-  
+    @IBAction func closeImport(_ sender: UIButton) {
+        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+    }
+    @IBAction func importPdf(_ sender: UIButton) {
+        self.handleSharedFile()
+    }
+    
     private func handleSharedFile() {
       // extracting the path to the URL that is being shared
       let attachments = (self.extensionContext?.inputItems.first as? NSExtensionItem)?.attachments ?? []
@@ -26,23 +32,47 @@ class ShareViewController: UIViewController {
                
           if let url = data as? URL,
              let imageData = try? Data(contentsOf: url) {
-               self.save(imageData, key: "imageData", value: imageData)
+            let stringBase64Pdf = imageData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
+            //self.save(fileBase64: stringBase64Pdf, key: "imageData")
+            self.uploadApi(fileBase64: stringBase64Pdf)
           } else {
             // Handle this situation as you prefer
             fatalError("Impossible to save image")
           }
-            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
 
         }}
       }
     }
       
-    private func save(_ data: Data, key: String, value: Any) {
-        let fileStream:String = data.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
+    private func save(fileBase64: String, key: String) {
 
         let userDefaults = UserDefaults(suiteName:  "group.ch.netty.app")
         userDefaults?.addSuite(named: "group.ch.netty.app")
-        userDefaults?.set(fileStream, forKey: key)
+        userDefaults?.set(fileBase64, forKey: key)
         userDefaults?.synchronize()
+    }
+    
+ 
+    private func uploadApi(fileBase64: String) {
+        let urlString = URL(string: "https://netty-app.herokuapp.com/classifier/analyse-pdf")!
+        var request = URLRequest(url: urlString)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpMethod = "POST"
+        
+        let json = [
+            "data": fileBase64,
+        ]
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .withoutEscapingSlashes) {
+            URLSession.shared.uploadTask(with: request, from: jsonData) {
+                data, response, error in
+                if let httpResponse = response as? HTTPURLResponse {
+                    self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+
+                }
+            }.resume()
+        }
+        
     }
 }
