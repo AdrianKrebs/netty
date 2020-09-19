@@ -50,7 +50,11 @@ router.post('/analyse-pdf', (req, res, next) => {
         // y between lines 0.638
         // y between line with separator 0.753
 
-        let firstLine = texts.filter(text => text.y === yOffset).map(entry => entry.R[0].T);
+        const parsedPages = extractTransactionRowsFromPdf(pdfData.formImage);
+        parsedPages[1].forEach(row => {
+            console.log(JSON.stringify(row));
+        })
+
 
         res.json([
             {
@@ -59,7 +63,7 @@ router.post('/analyse-pdf', (req, res, next) => {
                 text: "EAT.CH",
                 location: "ZURICH CH",
                 category: "Fastfood-Restaurants",
-                emissioCategory: "Food",
+                emissionCategory: "Food",
                 price: "38.70",
                 carbon: 0.3,
                 score: 0.8
@@ -119,6 +123,83 @@ router.post('/analyse-pdf', (req, res, next) => {
 
     res.sendStatus(200);
 });
+
+
+let  extractTransactionRowsFromPdf = function (data) {
+    var myPages = [];
+
+    for (var p = 0; p < data.Pages.length; p++) {
+        var page = data.Pages[p];
+
+        var rows = []; // store Texts and their x positions in rows
+
+        for (var t = 0; t < page.Texts.length; t++) {
+            var text = page.Texts[t];
+
+            var foundRow = false;
+            for (var r = rows.length - 1; r >= 0; r--) {
+
+                // y value of Text falls within the y-value range, add text to row:
+                var maxYdifference = 0.638;
+                if(rows[r].y - maxYdifference < text.y && text.y < rows[r].y + maxYdifference) {
+
+                    // only add value of T to data (which is the actual text):
+                    for (var i = 0; i < text.R.length; i++) {
+                        rows[r].data.push({
+                            text: decodeURIComponent(text.R[i].T),
+                            x: text.x
+                        });
+                    };
+                    foundRow = true;
+                }
+            };
+            if(!foundRow){
+                // create new row:
+                var row = {
+                    y: text.y,
+                    data: []
+                };
+
+                // add text to row:
+                for (var i = 0; i < text.R.length; i++) {
+                    row.data.push({
+                        text: decodeURIComponent(text.R[i].T),
+                        x: text.x
+                    });
+                };
+
+                // add row to rows:
+                rows.push(row);
+            }
+
+        };
+
+        // sort each extracted row
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].data.sort(comparer)
+        }
+
+        // add rows to pages:
+        myPages.push(rows);
+    };
+
+    return myPages;
+}
+
+
+let comparer = function (a, b) {
+    /*
+        Compares two objects by their 'x' properties.
+    */
+    if (a.x > b.x) {
+        return 1;
+    }
+    if (a.x < b.x) {
+        return -1;
+    }
+    // a must be equal to b
+    return 0;
+}
 
 
 module.exports = router;
