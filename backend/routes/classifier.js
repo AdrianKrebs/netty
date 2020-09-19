@@ -15,9 +15,8 @@ router.get('/reduction', function (req, res, next) {
 
     res.json([
         {name: 'more efficient vehicle', tonsSaved: 2.2, dollarsSaved: '686', upfrontCosts: 2000},
-        {name: 'purchase alternative fuel vehicle', tonsSaved: 3.0, dollarsSaved: '958', upfrontCosts: 17000},
         {name: 'purchase electric vehicle', tonsSaved: 4.3, dollarsSaved: '922', upfrontCosts: 15000},
-        {name: 'Work from home', tonsSaved: 1.0, dollarsSaved: '545', upfrontCosts: 0},
+        {name: 'Work from home', tonsSaved: 1.2, dollarsSaved: '545', upfrontCosts: 0},
         {name: 'Ride my bike', tonsSaved: 0.5, dollarsSaved: '165', upfrontCosts: 0},
         {name: 'Take public transportation', tonsSaved: 0.4, dollarsSaved: '165', upfrontCosts: 0},
         {name: 'Practice eco driving', tonsSaved: 0.4, dollarsSaved: '110', upfrontCosts: 0},
