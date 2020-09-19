@@ -41,16 +41,19 @@ router.post('/analyse-pdf', (req, res, next) => {
         fs.writeFileSync("parsedPdf.json", JSON.stringify(pdfData));
         const yOffset = 15.506;
         const pages = pdfData.formImage.Pages;
-        const texts = pages[1].Texts;
+        const texts = pages[1].Texts; // get through all pages
 
         //TODO read lines until next date appears
         // y between lines 0.638
         // y between line with separator 0.753
 
         const parsedPages = extractTransactionRowsFromPdf(pdfData.formImage);
-        parsedPages[1].forEach(row => {
-            console.log(JSON.stringify(row));
+        parsedPages.forEach(rows => {
+            rows.forEach(row => {
+                console.log(JSON.stringify(row));
+            })
         })
+
 
 
     });
@@ -112,7 +115,18 @@ router.get('/transaction-data', (req, res, next) => {
             price: "15.20",
             carbon: 0.2,
             score: 0.85
+        },
+        {
+            transactionId: 5,
+            date: "21.02.20",
+            text: "Shamrock Irish Pub",
+            location: "Zurich CH",
+            category: "Food",
+            price: "15.20",
+            carbon: 0.2,
+            score: 0.85
         }
+
 
     ])
 
