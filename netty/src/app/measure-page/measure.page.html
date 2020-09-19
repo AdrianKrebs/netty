@@ -13,7 +13,9 @@
         </ion-card-header>
 
         <ion-card-content>
-            <div class="carbon-total" [ngStyle]="carbonTotalColor | async">{{ carbonTotal$ | async | number: '1.1-1' }} kg</div>
+            <div class="carbon-total" [ngStyle]="carbonTotalColor | async">{{ carbonTotal$ | async | number: '1.1-1' }}
+                kg
+            </div>
         </ion-card-content>
     </ion-card>
 
@@ -27,8 +29,8 @@
                     <h4>{{ transaction.prettyText || transaction.text }}</h4>
                     <div class="small">{{ transaction.date | date }}</div>
                 </ion-label>
-                <ion-label style="flex-grow: 0.5" class="co2-emission">
-                   <h4><ion-badge [color]="getColorForScore(transaction.carbon)">{{ transaction.carbon}} kg CO₂</ion-badge> </h4>
+                <ion-label style="flex-grow: 0.75" class="co2-emission">
+                    <ion-badge [color]="getColorForScore(transaction.carbon)">{{ transaction.carbon}} kg CO₂</ion-badge>
                     <div class="small">Accuracy: {{getLabelForScore(transaction.score)}}</div>
                     <div class="small"> {{ transaction.price | number:'1.2-2' }} CHF</div>
                 </ion-label>
