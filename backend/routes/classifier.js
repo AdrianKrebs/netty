@@ -126,7 +126,17 @@ router.get('/transaction-data', (req, res, next) => {
             location: "Dubendorf CH",
             category: "Car",
             price: "58.20",
-            carbon: 5.2,
+            carbon: 65,
+            score: 0.9
+        },
+        {
+            transactionId: 3,
+            date: "24.02.20",
+            text: "Agrola Tankstelle",
+            location: "Bern CH",
+            category: "Car",
+            price: "65.20",
+            carbon: 100,
             score: 0.9
         },
         {
@@ -166,7 +176,7 @@ router.get('/transaction-data', (req, res, next) => {
             location: "Zurich CH",
             category: "Flight",
             price: "1002.00",
-            carbon: 3100,
+            carbon: 870,
             score: 0.95
         },
         {
@@ -176,7 +186,7 @@ router.get('/transaction-data', (req, res, next) => {
             location: "Hamburg DE",
             category: "Car",
             price: "120.00",
-            carbon: 200,
+            carbon: 210,
             score: 0.8
         },
         {
