@@ -27,7 +27,7 @@ export class OffsetPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.carbonTotal$ = this.transactionService.getCarbonTotal();
+        this.carbonTotal$ = this.transactionService.getCarobonTotalInstant();
     }
 
     getTotalOffsetValue() {

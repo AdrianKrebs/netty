@@ -13,7 +13,6 @@ export class TransactionService {
 
     private transactions = [];
 
-
     constructor(private http: HttpClient) {
     }
 
@@ -68,5 +67,9 @@ export class TransactionService {
                 return current;
             })
         );
+    }
+
+    getCarobonTotalInstant(): Observable<number> {
+        return of(this.transactions.reduce((a, b) => a + b.carbon, 0));
     }
 }
