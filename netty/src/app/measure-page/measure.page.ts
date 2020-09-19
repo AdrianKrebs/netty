@@ -6,7 +6,7 @@ import {filter, map, take, tap} from 'rxjs/operators';
 import SmokeMachine from '@bijection/smoke'
 
 
-const BAD_CARBON_VALUE = 100; // in kg
+const BAD_CARBON_VALUE = 4000; // in kg
 
 
 @Component({
@@ -64,10 +64,6 @@ export class MeasurePage implements OnInit, AfterViewInit {
             default:
                 return 'jam jam-credit-card';
         }
-    }
-
-    setActiveSegment(segment) {
-        console.log(segment);
     }
 
     getLabelForScore(score: number) {
