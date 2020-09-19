@@ -1,4 +1,6 @@
 var express = require('express');
+let fs = require('fs'),
+    PDFParser = require("pdf2json");
 
 var router = express.Router();
 
@@ -34,6 +36,15 @@ router.post('/analyse-pdf',  (req, res, next) => {
         return res.status(400).send('No files were uploaded.');
     }
     console.log(req.files); // the uploaded file object
+    let pdfParser = new PDFParser();
+    fs.writeFileSync("sample.pdf", req.files.file.data);
+    pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError) );
+    pdfParser.on("pdfParser_dataReady", pdfData => {
+        fs.writeFileSync("F1040EZ.json", JSON.stringify(pdfData));
+    });
+
+    pdfParser.loadPDF('sample.pdf');
+
     res.sendStatus(200);
 });
 
