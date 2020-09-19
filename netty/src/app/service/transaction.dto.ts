@@ -1,12 +1,12 @@
-import {Moment} from 'moment';
-
-export interface Transaction {
-    date: Date;
+export interface TransactionDto {
+    transactionId: number;
+    date: string;
     text: string;
     prettyText?: string;
     location: string;
     category: string;
-    price?: number;
+    price?: string;
     carbon: number;
     score: number;
 }
+
