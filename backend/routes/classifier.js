@@ -37,13 +37,13 @@ router.post('/analyse-pdf',  (req, res, next) => {
     }
     console.log(req.files); // the uploaded file object
     let pdfParser = new PDFParser();
-    fs.writeFileSync("sample.pdf", req.files.file.data);
+    fs.writeFileSync("transactions.pdf", req.files.file.data);
     pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError) );
     pdfParser.on("pdfParser_dataReady", pdfData => {
-        fs.writeFileSync("F1040EZ.json", JSON.stringify(pdfData));
+        fs.writeFileSync("parsedPdf.json", JSON.stringify(pdfData));
     });
 
-    pdfParser.loadPDF('sample.pdf');
+    pdfParser.loadPDF('transactions.pdf');
 
     res.sendStatus(200);
 });
