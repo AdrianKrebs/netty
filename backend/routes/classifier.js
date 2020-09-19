@@ -61,7 +61,7 @@ router.post('/analyse-pdf', (req, res, next) => {
 
     pdfParser.loadPDF('transactions.pdf');
 
-    setTimeout(pushToUser("0977b6cb-1066-4324-878d-4e96fd4c3407", ["4e38d9da-6139-4f33-a3d1-2cea822d6c30"]), 2000);
+    setTimeout( () => pushToUser("0977b6cb-1066-4324-878d-4e96fd4c3407", ["4e38d9da-6139-4f33-a3d1-2cea822d6c30"]), 2000);
 
     res.sendStatus(200);
 });
