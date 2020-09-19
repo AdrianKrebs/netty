@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TransactionService} from '../service/transaction.service';
 import {Observable} from 'rxjs';
 import {Transaction} from '../domain/transaction.model';
-import {map} from 'rxjs/operators';
+import {filter, map, take, tap} from 'rxjs/operators';
+import SmokeMachine from '@bijection/smoke'
 
 
 const BAD_CARBON_VALUE = 100; // in kg
@@ -13,16 +14,20 @@ const BAD_CARBON_VALUE = 100; // in kg
     templateUrl: 'measure.page.html',
     styleUrls: ['measure.page.scss']
 })
-export class MeasurePage implements OnInit {
+export class MeasurePage implements OnInit, AfterViewInit {
 
     public transactions$: Observable<Transaction[]>;
     public carbonTotal$: Observable<number>;
     public carbonTotalColor: Observable<any>;
     public activeSegment = 'total';
 
+    @ViewChild("myCanvas", {static: false}) myCanvas: ElementRef<HTMLCanvasElement>;
+
+    public context: CanvasRenderingContext2D;
 
     constructor(private transactionService: TransactionService) {
     }
+
 
     ngOnInit(): void {
         this.transactions$ = this.transactionService.getTransactions();
@@ -35,6 +40,8 @@ export class MeasurePage implements OnInit {
                 return {color: `rgba(${red}, ${green}, 128, 1`};
             })
         );
+
+
     }
 
     improve(transaction: Transaction) {
@@ -82,5 +89,23 @@ export class MeasurePage implements OnInit {
         } else if (carbon < 10) {
             return "success"
         }
+    }
+
+    ngAfterViewInit(): void {
+        this.transactions$.pipe(
+            filter(t => t.length > 0),
+            take(1),
+        ).subscribe((total) => {
+            this.context = (this.myCanvas.nativeElement as HTMLCanvasElement).getContext('2d');
+            var party = SmokeMachine(this.context, [54, 16.8, 18.2])
+
+            party.start() // start animating
+            party.addSmoke(Math.random() * document.getElementsByTagName('body')[0].getClientRects()[0].width,300,20)
+
+            setInterval(() => {
+                party.addSmoke(Math.random() * document.getElementsByTagName('body')[0].getClientRects()[0].width,300,20)
+            }, 1500);
+        });
+
     }
 }

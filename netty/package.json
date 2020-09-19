@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "@bijection/smoke": "^1.0.2",
     "@capacitor/core": "2.4.1",
     "@capacitor/ios": "^2.4.1",
     "@ionic-native/app-preferences": "^5.28.0",

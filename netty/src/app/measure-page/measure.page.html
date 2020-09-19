@@ -7,11 +7,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-card *ngIf="(transactions$ | async).length > 0">
+    <ion-card>
 
         <ion-card-content>
-            <div class="carbon-total" [ngStyle]="carbonTotalColor | async">{{ carbonTotal$ | async | number: '1.1-1' }}</div>
+            <div class="carbon-total" [ngStyle]="carbonTotalColor | async">{{ (carbonTotal$ | async) * -1 | number: '1.1-1' }}</div>
             <div class="carbon-total-timeframe">uncompensated CO₂ in kg</div>
+            <canvas #myCanvas></canvas>
         </ion-card-content>
     </ion-card>
 
