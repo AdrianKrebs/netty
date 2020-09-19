@@ -9,6 +9,7 @@ import {environment} from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class TransactionService {
+
     constructor(private http: HttpClient) {
 
     }
@@ -37,5 +38,12 @@ export class TransactionService {
             }),
             startWith([]),
         );
+    }
+
+    getCarbonTotal(): Observable<number> {
+        return this.getTransactions()
+            .pipe(
+                map(transactions => transactions.reduce((a, b) => a + b.carbon, 0))
+            );
     }
 }
