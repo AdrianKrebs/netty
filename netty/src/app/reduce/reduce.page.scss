@@ -1,8 +1,8 @@
-.tips {
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
-}
 
+.tips {
+  padding-left: 16px;
+  padding-right: 16px;
+}
 .tip-title {
   padding-left: 16px;
   padding-right: 16px;
@@ -14,10 +14,5 @@
 }
 
 p {
-  color: black;
-}
-
-ion-card {
-  margin-left: 0;
-  margin-right:0;
+  color: var(--font-color);
 }
