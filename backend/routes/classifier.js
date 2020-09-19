@@ -62,8 +62,7 @@ router.post('/analyse-pdf', (req, res, next) => {
                 date: "01.02.20",
                 text: "EAT.CH",
                 location: "ZURICH CH",
-                category: "Fastfood-Restaurants",
-                emissionCategory: "Food",
+                category: "Food",
                 price: "38.70",
                 carbon: 0.3,
                 score: 0.8
@@ -73,8 +72,7 @@ router.post('/analyse-pdf', (req, res, next) => {
                 date: "02.02.20",
                 text: "Coop Pronto Dubendorfer.",
                 location: "Zurich CH",
-                category: "Supermärkte, Lebensmittel",
-                emissionCategory: "Groceries",
+                category: "Groceries",
                 carbon: 0.2,
                 score: 0.7
             },
@@ -83,8 +81,7 @@ router.post('/analyse-pdf', (req, res, next) => {
                 date: "05.02.20",
                 text: "SOCAR Buhlwiesen",
                 location: "Dubendorf CH",
-                category: "Tankstellen",
-                emissionCategory: "Car",
+                category: "Car",
                 price: "58.20",
                 carbon: 5.2,
                 score: 0.9
@@ -94,8 +91,7 @@ router.post('/analyse-pdf', (req, res, next) => {
                 date: "15.02.20",
                 text: "IKEA Dt. NL Freiburg",
                 location: "Freiburg im B DE",
-                category: "Möbel und Inneneinrichtung",
-                emissionCategory: "Goods",
+                category: "Goods",
                 price: "212.20",
                 carbon: 4.2,
                 score: 0.85
@@ -105,8 +101,7 @@ router.post('/analyse-pdf', (req, res, next) => {
                 date: "16.02.20",
                 text: "Shamrock Irish Pub",
                 location: "Zurich CH",
-                category: "Restaurants",
-                emissionCategory: "Food",
+                category: "Food",
                 price: "15.20",
                 carbon: 0.2,
                 score: 0.85
