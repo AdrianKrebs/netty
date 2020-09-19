@@ -14,8 +14,8 @@
             <ion-card *ngFor="let tip of reductionTips | async">
                 <ion-card-title class="tip-title"><b>{{tip.name}}</b></ion-card-title>
                 <ion-card-content>
-                    <p>You could save: {{tip.tonsSaved}} Tons of CO2 per year and {{tip.dollarsSaved}} $</p>
-                    <p>You would need to invest: {{tip.upfrontCosts}} $</p>
+                    <p>You could save: <b>{{tip.tonsSaved}}</b> Tons of CO2 per year and <b>{{tip.dollarsSaved}}</b> $</p>
+                    <p>You would need to invest: <b>{{tip.upfrontCosts}} $</b></p>
                 </ion-card-content>
             </ion-card>
         </div>
