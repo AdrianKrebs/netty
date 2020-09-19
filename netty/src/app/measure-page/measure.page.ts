@@ -26,10 +26,7 @@ export class MeasurePage implements OnInit {
 
     ngOnInit(): void {
         this.transactions$ = this.transactionService.getTransactions();
-        this.carbonTotal$ = this.transactions$
-            .pipe(
-                map(transactions => transactions.reduce((a, b) => a + b.carbon, 0))
-            );
+        this.carbonTotal$ = this.transactionService.getCarbonTotal();
         this.carbonTotalColor = this.carbonTotal$.pipe(
             map(carbonTotal => {
                 const red = Math.min(255, carbonTotal / BAD_CARBON_VALUE * 255.0);

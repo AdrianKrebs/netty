@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Offset
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card *ngFor="let provider of offsetProviders; let i = index">
+        <ion-card-header>
+            <ion-toggle [(ngModel)]="provider.enabled"></ion-toggle>
+            <ion-card-title>{{ provider.title }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            {{ provider.description }}
+
+            <div class="offset-active" *ngIf="provider.enabled">
+                <div class="offset-value">{{ ((carbonTotal$ | async) / 100.0 * provider.offset) | number: '1.1-1' }}kg</div>
+
+                <ion-range min="0" max="100" step="10" snaps="true" [(ngModel)]="provider.offset">
+                    <ion-label slot="start">0%</ion-label>
+                    <ion-label slot="end">100%</ion-label>
+                </ion-range>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
