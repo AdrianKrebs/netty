@@ -54,13 +54,13 @@ export class TransactionService {
 
     getCarbonTotal(): Observable<number> {
         const die$ = new Subject();
-        const interval$ = interval(100);
+        const interval$ = interval(50);
 
         return interval$.pipe(
             takeUntil(die$),
             map((i) => {
                 const total = this.transactions.reduce((a, b) => a + b.carbon, 0);
-                const current = i * 115.2;
+                const current = i * 12.2;
                 console.log(current, total);
                 if (current > total) {
                     die$.next();
