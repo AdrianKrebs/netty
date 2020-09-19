@@ -56,61 +56,6 @@ router.post('/analyse-pdf', (req, res, next) => {
         })
 
 
-        res.json([
-            {
-                transactionId: 1,
-                date: "01.02.20",
-                text: "EAT.CH",
-                location: "ZURICH CH",
-                category: "Food",
-                price: "38.70",
-                carbon: 0.3,
-                score: 0.8
-            },
-            {
-                transactionId: 2,
-                date: "02.02.20",
-                text: "Coop Pronto Dubendorfer.",
-                location: "Zurich CH",
-                category: "Groceries",
-                carbon: 0.2,
-                score: 0.7
-            },
-            {
-                transactionId: 3,
-                date: "05.02.20",
-                text: "SOCAR Buhlwiesen",
-                location: "Dubendorf CH",
-                category: "Car",
-                price: "58.20",
-                carbon: 5.2,
-                score: 0.9
-            },
-            {
-                transactionId: 4,
-                date: "15.02.20",
-                text: "IKEA Dt. NL Freiburg",
-                location: "Freiburg im B DE",
-                category: "Goods",
-                price: "212.20",
-                carbon: 4.2,
-                score: 0.85
-            },
-            {
-                transactionId: 5,
-                date: "16.02.20",
-                text: "Shamrock Irish Pub",
-                location: "Zurich CH",
-                category: "Food",
-                price: "15.20",
-                carbon: 0.2,
-                score: 0.85
-            }
-
-
-
-
-        ])
     });
 
 
@@ -120,8 +65,65 @@ router.post('/analyse-pdf', (req, res, next) => {
 });
 
 
+router.get('/transaction-data', (req, res, next) => {
+    res.json([
+        {
+            transactionId: 1,
+            date: "01.02.20",
+            text: "EAT.CH",
+            location: "ZURICH CH",
+            category: "Food",
+            price: "38.70",
+            carbon: 0.3,
+            score: 0.8
+        },
+        {
+            transactionId: 2,
+            date: "02.02.20",
+            text: "Coop Pronto Dubendorfer.",
+            location: "Zurich CH",
+            category: "Groceries",
+            carbon: 0.2,
+            score: 0.7
+        },
+        {
+            transactionId: 3,
+            date: "05.02.20",
+            text: "SOCAR Buhlwiesen",
+            location: "Dubendorf CH",
+            category: "Car",
+            price: "58.20",
+            carbon: 5.2,
+            score: 0.9
+        },
+        {
+            transactionId: 4,
+            date: "15.02.20",
+            text: "IKEA Dt. NL Freiburg",
+            location: "Freiburg im B DE",
+            category: "Goods",
+            price: "212.20",
+            carbon: 4.2,
+            score: 0.85
+        },
+        {
+            transactionId: 5,
+            date: "16.02.20",
+            text: "Shamrock Irish Pub",
+            location: "Zurich CH",
+            category: "Food",
+            price: "15.20",
+            carbon: 0.2,
+            score: 0.85
+        }
+
+    ])
+
+});
+
 let  extractTransactionRowsFromPdf = function (data) {
     var myPages = [];
+    const yOffset = 15.506;
 
     for (var p = 0; p < data.Pages.length; p++) {
         var page = data.Pages[p];
@@ -169,13 +171,18 @@ let  extractTransactionRowsFromPdf = function (data) {
 
         };
 
+
+        // filter y offset
+        const filteredRows = rows.filter(row => row.y > yOffset);
         // sort each extracted row
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].data.sort(comparer)
+        for (var i = 0; i < filteredRows.length; i++) {
+            filteredRows[i].data.sort(comparer)
         }
 
+
+
         // add rows to pages:
-        myPages.push(rows);
+        myPages.push(filteredRows);
     };
 
     return myPages;
