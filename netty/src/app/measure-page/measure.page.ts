@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {TransactionService} from '../service/transaction.service';
 import {Observable} from 'rxjs';
 import {Transaction} from '../domain/transaction.model';
+import {map} from 'rxjs/operators';
+
+
+const BAD_CARBON_VALUE = 100; // in kg
+
 
 @Component({
     selector: 'app-tab1',
@@ -11,6 +16,9 @@ import {Transaction} from '../domain/transaction.model';
 export class MeasurePage implements OnInit {
 
     public transactions$: Observable<Transaction[]>;
+    public carbonTotal$: Observable<number>;
+    public carbonTotalColor: Observable<any>;
+    public activeSegment = 'total';
 
 
     constructor(private transactionService: TransactionService) {
@@ -18,6 +26,18 @@ export class MeasurePage implements OnInit {
 
     ngOnInit(): void {
         this.transactions$ = this.transactionService.getTransactions();
+        this.carbonTotal$ = this.transactions$
+            .pipe(
+                map(transactions => transactions.reduce((a, b) => a + b.carbon, 0))
+            );
+        this.carbonTotalColor = this.carbonTotal$.pipe(
+            map(carbonTotal => {
+                const red = Math.min(255, carbonTotal / BAD_CARBON_VALUE * 255.0);
+                const green = Math.min(255, (1.0 - (carbonTotal / BAD_CARBON_VALUE)) * 255.0);
+
+                return {color: `rgba(${red}, ${green}, 128, 1`};
+            })
+        );
     }
 
     improve(transaction: Transaction) {
@@ -37,5 +57,9 @@ export class MeasurePage implements OnInit {
             default:
                 return 'jam jam-credit-card';
         }
+    }
+
+    setActiveSegment(segment) {
+        console.log(segment);
     }
 }
