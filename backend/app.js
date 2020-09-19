@@ -24,8 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/classifier', usersRouter);
+app.set('port', process.env.PORT || 3000);
 
-app.listen(3000, () => {
+app.listen(app.get('port'), () => {
     console.log(`Example app listening at http://localhost:3000`)
 })
 
