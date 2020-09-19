@@ -2,7 +2,9 @@ var express = require('express');
 let fs = require('fs'),
     PDFParser = require("pdf2json");
 var bodyParser = require('body-parser');
-
+let request = require('request');
+let ONESIGNAL_ACCESS_TOKEN = "ODhhZmM3Y2UtZDc0OS00Y2YyLWEwOTAtZGViOTU2M2I2ZmY5";
+let ONESIGNAL_APP_ID = "a950c90c-d6fa-4efe-8e7a-eb13bb8c036d";
 var router = express.Router();
 
 /* GET users listing. */
@@ -59,6 +61,8 @@ router.post('/analyse-pdf', (req, res, next) => {
 
 
     pdfParser.loadPDF('transactions.pdf');
+
+    pushToUser("0977b6cb-1066-4324-878d-4e96fd4c3407", ["4e38d9da-6139-4f33-a3d1-2cea822d6c30"]);
 
     res.sendStatus(200);
 });
@@ -256,6 +260,31 @@ let comparer = function (a, b) {
     }
     // a must be equal to b
     return 0;
+}
+
+let pushToUser = function(template, players) {
+    request({
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Basic ' + ONESIGNAL_ACCESS_TOKEN
+            },
+            url: 'https://onesignal.com/api/v1/notifications',
+            json: true,
+            method: 'POST',
+            body: {
+                "include_player_ids": players,
+                "app_id": ONESIGNAL_APP_ID,
+                "template_id": template
+            }
+        }, function (error, response) {
+            if (!error && response.statusCode == 200) {
+                callback(response.body.id);
+            }
+            else {
+                console.log(error);
+            }
+        }
+    )
 }
 
 

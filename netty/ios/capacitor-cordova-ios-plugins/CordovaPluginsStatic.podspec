@@ -13,6 +13,7 @@
     s.dependency 'CapacitorCordova'
     s.swift_version  = '5.0'
     s.static_framework = true
+    s.dependency 'OneSignal', '2.15.2'
     s.dependency 'FirebaseMessaging', '~> 2.0.0'
-    s.frameworks = 'PushKit'
+    s.frameworks = 'SystemConfiguration', 'PushKit'
   end

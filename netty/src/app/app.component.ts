@@ -29,28 +29,28 @@ export class AppComponent {
     }
 
     private initializePush() {
-        this.push.hasPermission()
-            .then((res: any) => {
-                if (res.isEnabled) {
-                    console.log('We have permission to send push notifications');
-                } else {
-                    console.log('We do not have permission to send push notifications');
-                }
-            });
+        //Remove this method to stop OneSignal Debugging
+        window["plugins"].OneSignal.setLogLevel({logLevel: 6, visualLevel: 0});
 
-        const options: PushOptions = {
-            android: {},
-            ios: {
-                alert: 'true',
-                badge: true,
-                sound: 'false'
-            },
-            windows: {},
-            browser: {
-                pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-            }
-        }
+        var notificationOpenedCallback = function(jsonData) {
+            console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+        };
 
-        const pushObject: PushObject = this.push.init(options);
+        // Set your iOS Settings
+        var iosSettings = {};
+        iosSettings["kOSSettingsKeyAutoPrompt"] = false;
+        iosSettings["kOSSettingsKeyInAppLaunchURL"] = false;
+
+        window["plugins"].OneSignal
+            .startInit("a950c90c-d6fa-4efe-8e7a-eb13bb8c036d")
+            .handleNotificationOpened(notificationOpenedCallback)
+            .iOSSettings(iosSettings)
+            .inFocusDisplaying(window["plugins"].OneSignal.OSInFocusDisplayOption.Notification)
+            .endInit();
+
+        // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 6)
+        window["plugins"].OneSignal.promptForPushNotificationsWithUserResponse(function(accepted) {
+            console.log("User accepted notifications: " + accepted);
+        });
     }
 }
