@@ -6,5 +6,9 @@
     <param name="ios-package" value="AppPreferences"/>
   </feature>
 
+  <feature name="PushNotification">
+    <param name="ios-package" value="PushPlugin"/>
+  </feature>
+
   
 </widget>

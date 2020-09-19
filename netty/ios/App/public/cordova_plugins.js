@@ -8,12 +8,21 @@
         "clobbers": [
           "plugins.appPreferences"
         ]
+        },
+      {
+          "id": "phonegap-plugin-push.PushNotification",
+          "file": "plugins/phonegap-plugin-push/www/push.js",
+          "pluginId": "phonegap-plugin-push",
+        "clobbers": [
+          "PushNotification"
+        ]
         }
     ];
     module.exports.metadata =
     // TOP OF METADATA
     {
-      "cordova-plugin-app-preferences": "0.99.3"
+      "cordova-plugin-app-preferences": "0.99.3",
+      "phonegap-plugin-push": "2.3.0"
     };
     // BOTTOM OF METADATA
     });

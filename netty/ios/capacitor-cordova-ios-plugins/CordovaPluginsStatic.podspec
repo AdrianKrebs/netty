@@ -13,4 +13,6 @@
     s.dependency 'CapacitorCordova'
     s.swift_version  = '5.0'
     s.static_framework = true
+    s.dependency 'FirebaseMessaging', '~> 2.0.0'
+    s.frameworks = 'PushKit'
   end
