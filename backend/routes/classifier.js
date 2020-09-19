@@ -114,7 +114,7 @@ const transactionData = [
         text: "Lufthansa",
         location: "Zurich CH",
         category: "Flight",
-        price: "1002.00",
+        price: "427.00",
         carbon: 870,
         score: 0.95
     },
