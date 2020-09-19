@@ -28,8 +28,8 @@ export class MeasurePage implements OnInit, AfterViewInit {
     }
 
 
-    ngOnInit(): void {
-        this.transactionService.fetchTransactions();
+    async ngOnInit() {
+        await this.transactionService.fetchTransactions();
 
         this.transactions$ = this.transactionService.getTransactions();
         this.carbonTotal$ = this.transactionService.getCarbonTotal();
