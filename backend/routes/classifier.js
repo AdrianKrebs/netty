@@ -16,18 +16,48 @@ router.get('/reduction', function (req, res, next) {
 
 
     res.json([
-        {name: 'Purchase more efficient vehicle', tonsSaved: 2.2, dollarsSaved: '686', upfrontCosts: 2000},
-        {name: 'Purchase electric vehicle', tonsSaved: 4.3, dollarsSaved: '922', upfrontCosts: 15000},
-        {name: 'Work from home', tonsSaved: 1.2, dollarsSaved: '545', upfrontCosts: 0},
-        {name: 'Ride my bike', tonsSaved: 0.5, dollarsSaved: '165', upfrontCosts: 0},
-        {name: 'Take public transportation', tonsSaved: 0.4, dollarsSaved: '165', upfrontCosts: 0},
-        {name: 'Practice eco driving', tonsSaved: 0.4, dollarsSaved: '110', upfrontCosts: 0},
-        {name: 'Carpool to work', tonsSaved: 0.9, dollarsSaved: '362', upfrontCosts: 0},
-        {name: 'Reduce air travel', tonsSaved: 0.4, dollarsSaved: '102', upfrontCosts: 0},
-        {name: 'Turn of lights', tonsSaved: 0.1, dollarsSaved: '46', upfrontCosts: 0},
-        {name: 'Purchase high efficiency heating', tonsSaved: 0.1, dollarsSaved: '46', upfrontCosts: 0},
-        {name: 'Reduce my waste', tonsSaved: 0.4, dollarsSaved: '17', upfrontCosts: 0},
-        {name: 'Eat a low carbon diet', tonsSaved: 0.7, dollarsSaved: '419', upfrontCosts: 0},
+        {
+            name: 'Purchase more efficient vehicle',
+            tonsSaved: 2.2,
+            dollarsSaved: '686',
+            upfrontCosts: 2000,
+            proportion: {percentage: 43, category: 'Car'}
+        },
+        {
+            name: 'Purchase electric vehicle',
+            tonsSaved: 4.3,
+            dollarsSaved: '922',
+            upfrontCosts: 15000,
+            proportion: {percentage: 43, category: 'Car'}
+        },
+        {name: 'Work from home', tonsSaved: 1.2, dollarsSaved: '545', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
+        {name: 'Carpool to work', tonsSaved: 0.9, dollarsSaved: '362', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
+        {name: 'Reduce air travel', tonsSaved: 0.7, dollarsSaved: '102', upfrontCosts: 0, proportion: {percentage: 22, category: 'Flight'}},
+        {name: 'Ride my bike', tonsSaved: 0.5, dollarsSaved: '165', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
+        {
+            name: 'Take public transportation',
+            tonsSaved: 0.4,
+            dollarsSaved: '165',
+            upfrontCosts: 0,
+            proportion: {percentage: 43, category: 'Car'}
+        },
+        {name: 'Practice eco driving', tonsSaved: 0.4, dollarsSaved: '110', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
+        {name: 'Turn of lights', tonsSaved: 0.1, dollarsSaved: '46', upfrontCosts: 0, proportion: {percentage: 7, category: 'Home'}},
+        {
+            name: 'Purchase high efficiency heating',
+            tonsSaved: 0.1,
+            dollarsSaved: '46',
+            upfrontCosts: 0,
+            proportion: {percentage: 7, category: 'Home'}
+        },
+        {name: 'Reduce my waste', tonsSaved: 0.4, dollarsSaved: '17', upfrontCosts: 0, proportion: {percentage: 7, category: 'Home'}},
+        {
+            name: 'Eat a low carbon diet',
+            tonsSaved: 0.7,
+            dollarsSaved: '419',
+            upfrontCosts: 0,
+            proportion: {percentage: 7, category: 'Food'}
+        },
     ]);
 });
 
@@ -61,7 +91,7 @@ router.post('/analyse-pdf', (req, res, next) => {
 
     pdfParser.loadPDF('transactions.pdf');
 
-    setTimeout( () => pushToUser("0977b6cb-1066-4324-878d-4e96fd4c3407", ["4e38d9da-6139-4f33-a3d1-2cea822d6c30"]), 2000);
+    setTimeout(() => pushToUser("0977b6cb-1066-4324-878d-4e96fd4c3407", ["4e38d9da-6139-4f33-a3d1-2cea822d6c30"]), 2000);
 
     res.sendStatus(200);
 });
@@ -77,7 +107,7 @@ router.get('/transaction-data', (req, res, next) => {
             category: "Food",
             price: "38.70",
             carbon: 0.3,
-            score: 0.8
+            score: 0.8,
         },
         {
             transactionId: 2,
