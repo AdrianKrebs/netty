@@ -28,7 +28,7 @@
                     <div class="small">{{ transaction.date | date }}</div>
                 </ion-label>
                 <ion-label style="flex-grow: 0.5" class="co2-emission">
-                   <h4><ion-badge color="secondary">{{ transaction.carbon}} kg CO₂</ion-badge> </h4>
+                   <h4><ion-badge [color]="getColorForScore(transaction.carbon)">{{ transaction.carbon}} kg CO₂</ion-badge> </h4>
                     <div class="small"> {{ transaction.price | number:'1.2-2' }} CHF</div>
                     <div class="small">Accuracy: {{getLabelForScore(transaction.score)}}</div>
                 </ion-label>
@@ -50,9 +50,4 @@
             </p>
         </ion-card-content>
     </ion-card>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button>
-            <ion-icon name="camera"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
 </ion-content>

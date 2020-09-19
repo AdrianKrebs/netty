@@ -71,4 +71,16 @@ export class MeasurePage implements OnInit {
             return "Low"
         }
     }
+
+    getColorForScore(carbon: number) {
+        if (carbon > 2500) {
+            return "danger"
+        } else if (carbon > 300) {
+            return "warning"
+        } else if (carbon < 100 && carbon > 10) {
+            return "secondary"
+        } else if (carbon < 10) {
+            return "success"
+        }
+    }
 }
