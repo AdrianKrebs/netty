@@ -82,6 +82,7 @@ router.get('/transaction-data', (req, res, next) => {
             text: "Coop Pronto Dubendorfer.",
             location: "Zurich CH",
             category: "Groceries",
+            price: "12.25",
             carbon: 0.2,
             score: 0.7
         },
