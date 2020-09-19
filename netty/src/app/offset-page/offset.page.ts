@@ -17,6 +17,11 @@ export class OffsetPage implements OnInit {
         {title: 'Myclimate', description: 'We want to shape the future together with you through consulting services, education and climate protection projects. We are motivated and experienced experts in sustainability and climate protection with high-​profile supporters.', enabled: false, offset: 0},
     ];
 
+    gaugeType = "semi";
+    gaugeValue = 28.3;
+    gaugeLabel = "Speed";
+    gaugeAppendText = "km/hr";
+
 
     constructor(private transactionService: TransactionService) {
     }
@@ -25,10 +30,16 @@ export class OffsetPage implements OnInit {
         this.carbonTotal$ = this.transactionService.getCarbonTotal();
     }
 
+    getTotalOffsetValue() {
+        return this.offsetProviders.reduce((a, b) => a + b.offset, 0);
+    }
 
-    changeOffset(index, offsetValue) {
-        console.log(offsetValue);
-        this.offsetProviders[index].offset = offsetValue;
+    getGaugeColor() {
+
+        const green = Math.min(255, this.getTotalOffsetValue() / 100.0 * 255.0);
+        const red = Math.min(255, (1.0 - (this.getTotalOffsetValue() / 100.0)) * 255.0);
+
+        return `rgba(${red}, ${green}, 128, 1)`;
     }
 
 }

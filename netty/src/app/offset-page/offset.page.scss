@@ -17,3 +17,24 @@ ion-range {
   text-align: center;
   font-size: 40px;
 }
+
+.gauge-wrapper {
+  z-index: 100;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: var(--ion-color-step-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+
+  padding-bottom: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.spacer {
+  height: 200px;
+}
+

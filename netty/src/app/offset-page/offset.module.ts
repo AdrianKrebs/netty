@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OffsetPage } from './offset.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 import { Tab3PageRoutingModule } from './offset-routing.module'
 
@@ -13,6 +14,7 @@ import { Tab3PageRoutingModule } from './offset-routing.module'
     IonicModule,
     CommonModule,
     FormsModule,
+    NgxGaugeModule,
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: OffsetPage }]),
     Tab3PageRoutingModule,
