@@ -90,7 +90,7 @@ const transactionData = [
     },
     {
         transactionId: 6,
-        date: "31.02.20",
+        date: "15.02.20",
         text: "EWZ Zurich",
         location: "Zuerich CH",
         category: "Home",

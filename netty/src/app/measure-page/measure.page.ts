@@ -6,7 +6,7 @@ import {filter, map, take, tap} from 'rxjs/operators';
 import SmokeMachine from '@bijection/smoke'
 
 
-const BAD_CARBON_VALUE = 4000; // in kg
+const BAD_CARBON_VALUE = 1500; // in kg
 
 
 @Component({
