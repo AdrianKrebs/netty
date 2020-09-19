@@ -47,5 +47,9 @@ export class ReducePage {
         }
     }
 
+    gradient(tip) {
+        return `conic-gradient(#28ba62 calc(${tip.proportion.percentage}%), #cfff94 0%)`;
+    }
+
 
 }
