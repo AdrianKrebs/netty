@@ -98,7 +98,7 @@ router.get('/transaction-data', (req, res, next) => {
         },
         {
             transactionId: 4,
-            date: "15.02.20",
+            date: "08.02.20",
             text: "IKEA Dt. NL Freiburg",
             location: "Freiburg im B DE",
             category: "Goods",
@@ -108,7 +108,7 @@ router.get('/transaction-data', (req, res, next) => {
         },
         {
             transactionId: 5,
-            date: "16.02.20",
+            date: "09.02.20",
             text: "Shamrock Irish Pub",
             location: "Zurich CH",
             category: "Food",
@@ -117,15 +117,59 @@ router.get('/transaction-data', (req, res, next) => {
             score: 0.85
         },
         {
-            transactionId: 5,
-            date: "21.02.20",
-            text: "Shamrock Irish Pub",
-            location: "Zurich CH",
-            category: "Food",
+            transactionId: 6,
+            date: "11.02.20",
+            text: "Press & Books",
+            location: "Zuerich CH",
+            category: "Goods",
             price: "15.20",
             carbon: 0.2,
             score: 0.85
+        },
+        {
+            transactionId: 7,
+            date: "18.02.20",
+            text: "Thai Airways",
+            location: "Zurich CH",
+            category: "Flight",
+            price: "1002.00",
+            carbon: 3100,
+            score: 0.95
+        },
+        {
+            transactionId: 8,
+            date: "18.02.20",
+            text: "Europcar.com/de",
+            location: "Hamburg DE",
+            category: "Car",
+            price: "120.00",
+            carbon: 200,
+            score: 0.8
+        },
+        {
+            transactionId: 9,
+            date: "18.02.20",
+            text: "APPLE.COM/BILL",
+            location: "ITUNES.COM IE",
+            category: "Internet",
+            price: "1.50",
+            carbon: 0,
+            score: 0.8
+        },
+        {
+            transactionId: 10,
+            date: "23.02.20",
+            text: "DEICHMANN",
+            location: "München DE",
+            category: "Goods",
+            price: "55.20",
+            carbon: 85,
+            score: 0.75
         }
+
+
+
+
 
 
     ])
