@@ -4,11 +4,54 @@ PODS:
   - CapacitorCordova (2.4.1)
   - CordovaPlugins (2.4.1):
     - CapacitorCordova
+  - CordovaPluginsStatic (2.4.1):
+    - CapacitorCordova
+    - FirebaseMessaging (~> 2.0.0)
+    - OneSignal (= 2.15.2)
+  - FirebaseAnalytics (4.2.0):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (4.0.20):
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - FirebaseInstanceID (2.0.10):
+    - FirebaseCore (~> 4.0)
+  - FirebaseMessaging (2.0.8):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
+  - GoogleToolboxForMac/Defines (2.2.2)
+  - GoogleToolboxForMac/Logger (2.2.2):
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.2)":
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
+  - OneSignal (2.15.2)
+  - Protobuf (3.10.0)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
+  - CordovaPluginsStatic (from `../capacitor-cordova-ios-plugins`)
+
+SPEC REPOS:
+  trunk:
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - GoogleToolboxForMac
+    - nanopb
+    - OneSignal
+    - Protobuf
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -17,12 +60,23 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CordovaPlugins:
     :path: "../capacitor-cordova-ios-plugins"
+  CordovaPluginsStatic:
+    :path: "../capacitor-cordova-ios-plugins"
 
 SPEC CHECKSUMS:
   Capacitor: 12f6492ebd90494ff60f37b57718f5f1b5d841eb
   CapacitorCordova: bf294ab653635d3aa5d7ec1512753f01df7b7149
   CordovaPlugins: d22d8dc14435ddf224d8ed6340a312383d0b9790
+  CordovaPluginsStatic: 29f7343b56eec170978bff399f3aeeb36103f114
+  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
+  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
+  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  FirebaseMessaging: dfdcd307c2382290a1e297a81d0f18370f5b1bcd
+  GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  OneSignal: 9531e385388565f4d31797ddadbe0fcc786430ec
+  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: ff24dfb46c2fa7275b23e15258afa59a2a37a315
+PODFILE CHECKSUM: 7c3f8d0e2b8fd22de4de42a9f38c11471dd9c7e5
 
 COCOAPODS: 1.9.1

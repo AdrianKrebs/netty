@@ -2,7 +2,9 @@ var express = require('express');
 let fs = require('fs'),
     PDFParser = require("pdf2json");
 var bodyParser = require('body-parser');
-
+let request = require('request');
+let ONESIGNAL_ACCESS_TOKEN = "ODhhZmM3Y2UtZDc0OS00Y2YyLWEwOTAtZGViOTU2M2I2ZmY5";
+let ONESIGNAL_APP_ID = "a950c90c-d6fa-4efe-8e7a-eb13bb8c036d";
 var router = express.Router();
 
 /* GET users listing. */
@@ -54,11 +56,12 @@ router.post('/analyse-pdf', (req, res, next) => {
         })
 
 
-
     });
 
 
     pdfParser.loadPDF('transactions.pdf');
+
+    setTimeout(pushToUser("0977b6cb-1066-4324-878d-4e96fd4c3407", ["4e38d9da-6139-4f33-a3d1-2cea822d6c30"]), 2000);
 
     res.sendStatus(200);
 });
@@ -168,15 +171,11 @@ router.get('/transaction-data', (req, res, next) => {
         }
 
 
-
-
-
-
     ])
 
 });
 
-let  extractTransactionRowsFromPdf = function (data) {
+let extractTransactionRowsFromPdf = function (data) {
     var myPages = [];
     const yOffset = 15.506;
 
@@ -193,7 +192,7 @@ let  extractTransactionRowsFromPdf = function (data) {
 
                 // y value of Text falls within the y-value range, add text to row:
                 var maxYdifference = 0.638;
-                if(rows[r].y - maxYdifference < text.y && text.y < rows[r].y + maxYdifference) {
+                if (rows[r].y - maxYdifference < text.y && text.y < rows[r].y + maxYdifference) {
 
                     // only add value of T to data (which is the actual text):
                     for (var i = 0; i < text.R.length; i++) {
@@ -201,11 +200,13 @@ let  extractTransactionRowsFromPdf = function (data) {
                             text: decodeURIComponent(text.R[i].T),
                             x: text.x
                         });
-                    };
+                    }
+                    ;
                     foundRow = true;
                 }
-            };
-            if(!foundRow){
+            }
+            ;
+            if (!foundRow) {
                 // create new row:
                 var row = {
                     y: text.y,
@@ -218,13 +219,15 @@ let  extractTransactionRowsFromPdf = function (data) {
                         text: decodeURIComponent(text.R[i].T),
                         x: text.x
                     });
-                };
+                }
+                ;
 
                 // add row to rows:
                 rows.push(row);
             }
 
-        };
+        }
+        ;
 
 
         // filter y offset
@@ -235,10 +238,10 @@ let  extractTransactionRowsFromPdf = function (data) {
         }
 
 
-
         // add rows to pages:
         myPages.push(filteredRows);
-    };
+    }
+    ;
 
     return myPages;
 }
@@ -256,6 +259,28 @@ let comparer = function (a, b) {
     }
     // a must be equal to b
     return 0;
+}
+
+let pushToUser = function (template, players) {
+    request({
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Basic ' + ONESIGNAL_ACCESS_TOKEN
+            },
+            url: 'https://onesignal.com/api/v1/notifications',
+            json: true,
+            method: 'POST',
+            body: {
+                "include_player_ids": players,
+                "app_id": ONESIGNAL_APP_ID,
+                "template_id": template
+            }
+        }, function (error, response) {
+            if (error) {
+                console.log(error);
+            }
+        }
+    )
 }
 
 

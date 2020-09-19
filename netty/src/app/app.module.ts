@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AppPreferences} from "@ionic-native/app-preferences/ngx";
 import {HttpClientModule} from '@angular/common/http';
+import {Push} from "@ionic-native/push/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     StatusBar,
     SplashScreen,
     AppPreferences,
+    Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
