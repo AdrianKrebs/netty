@@ -17,3 +17,34 @@ ion-range {
   text-align: center;
   font-size: 40px;
 }
+
+.gauge-wrapper {
+  z-index: 100;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: rgb(244, 244, 244);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+
+  padding-bottom: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-box-shadow: 0px -2px 50px -22px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px -2px 50px -22px rgba(0,0,0,0.75);
+  box-shadow: 0px -2px 50px -22px rgba(0,0,0,0.75);
+
+}
+
+@media (prefers-color-scheme: dark) {
+ .gauge-wrapper {
+   background-color: var(--ion-color-step-100);
+ }
+}
+
+.spacer {
+  height: 150px;
+}
+
