@@ -118,7 +118,7 @@ router.get('/transaction-data', (req, res, next) => {
             category: "Food",
             price: "15.20",
             carbon: 0.2,
-            score: 0.85
+            score: 0.3
         },
         {
             transactionId: 6,

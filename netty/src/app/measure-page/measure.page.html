@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
     <ion-card *ngIf="(transactions$ | async).length > 0">
         <ion-card-header>
-            <ion-card-title>CO₂ emissions</ion-card-title>
+            <ion-card-title class="card-title">CO₂ emissions <br> over the last 30 days</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
@@ -25,13 +25,12 @@
                 <div class="icon" [ngClass]="icon(transaction)"></div>
                 <ion-label>
                     <h4>{{ transaction.prettyText || transaction.text }}</h4>
-                    <div class="small">{{ transaction.category }}</div>
                     <div class="small">{{ transaction.date | date }}</div>
                 </ion-label>
                 <ion-label style="flex-grow: 0.5" class="co2-emission">
-                    <h4>{{ transaction.carbon}} kg CO₂</h4>
+                   <h4><ion-badge [color]="getColorForScore(transaction.carbon)">{{ transaction.carbon}} kg CO₂</ion-badge> </h4>
+                    <div class="small">Accuracy: {{getLabelForScore(transaction.score)}}</div>
                     <div class="small"> {{ transaction.price | number:'1.2-2' }} CHF</div>
-                    <div class="small">&nbsp;</div>
                 </ion-label>
             </ion-item>
             <ion-item-options side="end">
@@ -43,13 +42,12 @@
     <ion-card *ngIf="(transactions$ | async).length === 0">
         <ion-card-content>
             <p>
-              You have no categorized transactions yet.
+                You have no categorized transactions yet.
             </p>
-          <br />
+            <br/>
             <p>
                 <ion-button style="width: 100%">Upload transactions</ion-button>
             </p>
         </ion-card-content>
     </ion-card>
-
 </ion-content>
