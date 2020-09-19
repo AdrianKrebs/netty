@@ -61,4 +61,14 @@ export class MeasurePage implements OnInit {
     setActiveSegment(segment) {
         console.log(segment);
     }
+
+    getLabelForScore(score: number) {
+        if (score > 0.8) {
+            return "High"
+        } else if (score > 0.6 && score <= 0.8) {
+            return "Medium"
+        } else if (score <= 0.6) {
+            return "Low"
+        }
+    }
 }
