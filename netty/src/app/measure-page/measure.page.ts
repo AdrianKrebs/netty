@@ -26,10 +26,7 @@ export class MeasurePage implements OnInit {
 
     ngOnInit(): void {
         this.transactions$ = this.transactionService.getTransactions();
-        this.carbonTotal$ = this.transactions$
-            .pipe(
-                map(transactions => transactions.reduce((a, b) => a + b.carbon, 0))
-            );
+        this.carbonTotal$ = this.transactionService.getCarbonTotal();
         this.carbonTotalColor = this.carbonTotal$.pipe(
             map(carbonTotal => {
                 const red = Math.min(255, carbonTotal / BAD_CARBON_VALUE * 255.0);
@@ -46,14 +43,16 @@ export class MeasurePage implements OnInit {
 
     icon(transaction: Transaction) {
         switch (transaction.category) {
-            case 'transportation':
+            case 'Flight':
+                return 'jam jam-plane';
+            case 'Train':
                 return 'jam jam-train';
-            case 'fuel':
+            case 'Car':
                 return 'jam jam-car';
             case 'Food':
                 return 'jam jam-pizza-slice';
             case 'Goods':
-                return 'jam jam-gamepad';
+                return 'jam jam-shopping-cart';
             default:
                 return 'jam jam-credit-card';
         }

@@ -3,20 +3,22 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { OffsetPage } from './offset.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { NgxGaugeModule } from 'ngx-gauge';
 
-import { Tab3PageRoutingModule } from './tab3-routing.module'
+import { Tab3PageRoutingModule } from './offset-routing.module'
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    NgxGaugeModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab3Page }]),
+    RouterModule.forChild([{ path: '', component: OffsetPage }]),
     Tab3PageRoutingModule,
   ],
-  declarations: [Tab3Page]
+  declarations: [OffsetPage]
 })
 export class Tab3PageModule {}

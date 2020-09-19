@@ -32,6 +32,7 @@
     "jam-icons": "^2.0.0",
     "moment": "^2.28.0",
     "ng2-charts": "^2.4.1",
+    "ngx-gauge": "^1.1.0",
     "ngx-moment": "^5.0.0",
     "phonegap-plugin-push": "^2.3.0",
     "rxjs": "~6.5.5",

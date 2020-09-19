@@ -1,16 +1,16 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title>
-            Track your carbon footprint
+            Track
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
     <ion-card *ngIf="(transactions$ | async).length > 0">
-        <ion-item>
-            <ion-label>CO₂ emissions</ion-label>
-        </ion-item>
+        <ion-card-header>
+            <ion-card-title>CO₂ emissions</ion-card-title>
+        </ion-card-header>
 
         <ion-card-content>
             <div class="carbon-total" [ngStyle]="carbonTotalColor | async">{{ carbonTotal$ | async | number: '1.1-1' }} kg</div>
@@ -45,13 +45,10 @@
             <p>
               You have no categorized transactions yet.
             </p>
-
           <br />
-
             <p>
                 <ion-button style="width: 100%">Upload transactions</ion-button>
             </p>
-
         </ion-card-content>
     </ion-card>
 
