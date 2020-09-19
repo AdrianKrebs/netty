@@ -12,7 +12,7 @@
         <p>We analysed your transactions and tailored some useful tips to reduce your carbon emissions</p>
         <div>
             <ion-card *ngFor="let tip of reductionTips | async">
-                <ion-card-title class="tip-title"><b>{{tip.name}}</b></ion-card-title>
+                <ion-card-title class="tip-title">{{tip.name}}</ion-card-title>
                 <ion-card-content>
                     <p>You could save <b class="saved">{{tip.tonsSaved}} tons of CO2</b> per year and <b>{{tip.dollarsSaved}} $</b></p>
                     <p>Investment costs: <b>{{tip.upfrontCosts}}$</b></p>
