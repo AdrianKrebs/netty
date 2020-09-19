@@ -8,7 +8,6 @@
 
 <ion-content [fullscreen]="true">
     <ion-card>
-
         <ion-card-content>
             <div class="carbon-total" [ngStyle]="carbonTotalColor | async">{{ (carbonTotal$ | async) * -1 | number: '1.1-1' }}</div>
             <div class="carbon-total-timeframe">uncompensated CO₂ in kg</div>
@@ -37,12 +36,4 @@
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
-
-    <ion-card *ngIf="(transactions$ | async).length === 0">
-        <ion-card-content>
-            <p>
-                You have no categorized transactions yet.
-            </p>
-        </ion-card-content>
-    </ion-card>
 </ion-content>

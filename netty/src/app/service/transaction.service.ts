@@ -41,7 +41,7 @@ export class TransactionService {
         return interval$.pipe(
             takeUntil(die$),
             map((i) => {
-                if (i === this.transactions.length) {
+                if (this.transactions && i === this.transactions.length) {
                     die$.next();
                 }
                 return this.transactions.slice(0, i).sort((a, b) => a.date.getTime() < b.date.getTime() ? 1 : -1);
@@ -60,12 +60,12 @@ export class TransactionService {
             map((i) => {
                 const total = this.transactions.reduce((a, b) => a + b.carbon, 0);
                 const current = i * 12.2;
-                console.log(current, total);
                 if (current > total) {
                     die$.next();
                 }
                 return current;
-            })
+            }),
+            startWith(0)
         );
     }
 
