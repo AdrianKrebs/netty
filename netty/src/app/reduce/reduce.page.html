@@ -8,15 +8,18 @@
 
 <ion-content [fullscreen]="true">
     <div class="tips">
-        <h1>Top tips to reduce your footprint</h1>
-        <p>We analysed your transactions and tailored some useful tips to reduce your carbon emissions</p>
+        <h1>Top tips to reduce your carbon footprint</h1>
+        <p>We analysed your transactions and tailored some useful tips to reduce your carbon emissions.</p>
     </div>
 
     <ion-card *ngFor="let tip of reductionTips | async">
         <ion-card-title class="tip-title">{{tip.name}}</ion-card-title>
         <ion-card-content class="card-content">
             <div class="container">
-                <div id="activeBorder" class="active-border">
+                <div id="activeBorder" class="active-border"
+                [ngStyle]="{'background-image':
+                'linear-gradient(0deg, transparent 50%, #cfff94 50%),linear-gradient(' + tip.proportion.percentage * 3.6 +
+                'deg, #cfff94 50%, transparent 50%)'}">
                     <div id="circle" class="circle">
                         <div>
                             <div class="icon" [ngClass]="icon(tip.proportion.category)"></div>

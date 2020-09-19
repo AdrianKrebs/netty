@@ -78,10 +78,10 @@ export class MeasurePage implements OnInit {
             return 'danger';
         } else if (carbon > 150) {
             return 'warning';
-        } else if (carbon < 100 && carbon > 50) {
-            return 'warning-low';
-        } else if (carbon < 50) {
+        } else if (carbon < 150 && carbon > 50) {
             return 'success';
+        } else if (carbon < 50) {
+            return 'light';
         }
     }
 }
