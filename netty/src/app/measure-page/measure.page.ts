@@ -30,8 +30,10 @@ export class MeasurePage implements OnInit {
                 return 'jam jam-train';
             case 'fuel':
                 return 'jam jam-car';
-            case 'food':
+            case 'Food':
                 return 'jam jam-pizza-slice';
+            case 'Goods':
+                return 'jam jam-gamepad';
             default:
                 return 'jam jam-credit-card';
         }

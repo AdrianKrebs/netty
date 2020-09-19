@@ -34,12 +34,12 @@
       <ion-item>
         <div class="icon" [ngClass]="icon(transaction)"></div>
         <ion-label>
-          <h2>{{ transaction.name }}</h2>
-          <h3>{{ transaction.description }}</h3>
+          <h2>{{ transaction.prettyText || transaction.text }}</h2>
+          <h3>{{ transaction.location }}</h3>
         </ion-label>
         <ion-label style="flex-grow: 0.5" class="co2-emission">
-          <h2>{{ transaction.co2Emission}} kg CO₂</h2>
-          <h4> {{ transaction.price.number | number:'1.2-2' }} {{ transaction.price.currency }} </h4>
+          <h2>{{ transaction.carbon}} kg CO₂</h2>
+          <h4> {{ transaction.price | number:'1.2-2' }} CHF</h4>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">

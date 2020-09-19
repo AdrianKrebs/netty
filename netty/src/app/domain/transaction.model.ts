@@ -1,12 +1,12 @@
-export interface Transaction {
-    name: string;
-    description?: string;
-    category: string;
-    price: Money;
-    co2Emission: number;
-}
 
-export interface Money {
-    currency: string;
-    number: number;
+export interface Transaction {
+    transactionId: number;
+    date: string;
+    text: string;
+    prettyText?: string;
+    location: string;
+    category: string;
+    price?: string;
+    carbon: number;
+    score: number;
 }
