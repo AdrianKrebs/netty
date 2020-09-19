@@ -14,7 +14,7 @@ const BAD_CARBON_VALUE = 1500; // in kg
     templateUrl: 'measure.page.html',
     styleUrls: ['measure.page.scss']
 })
-export class MeasurePage implements OnInit, AfterViewInit {
+export class MeasurePage implements OnInit {
 
     public transactions$: Observable<Transaction[]>;
     public carbonTotal$: Observable<number>;
@@ -42,7 +42,20 @@ export class MeasurePage implements OnInit, AfterViewInit {
             })
         );
 
+        this.transactions$.pipe(
+            filter(t => t.length > 0),
+            take(1),
+        ).subscribe((total) => {
+            this.context = (this.myCanvas.nativeElement as HTMLCanvasElement).getContext('2d');
+            var party = SmokeMachine(this.context, [54, 16.8, 18.2])
 
+            party.start() // start animating
+            party.addSmoke(Math.random() * document.getElementsByTagName('body')[0].getClientRects()[0].width,300,20)
+
+            setInterval(() => {
+                party.addSmoke(Math.random() * document.getElementsByTagName('body')[0].getClientRects()[0].width,300,20)
+            }, 1500);
+        });
     }
 
     improve(transaction: Transaction) {
@@ -86,23 +99,5 @@ export class MeasurePage implements OnInit, AfterViewInit {
         } else if (carbon < 50) {
             return 'success';
         }
-    }
-
-    ngAfterViewInit(): void {
-        this.transactions$.pipe(
-            filter(t => t.length > 0),
-            take(1),
-        ).subscribe((total) => {
-            this.context = (this.myCanvas.nativeElement as HTMLCanvasElement).getContext('2d');
-            var party = SmokeMachine(this.context, [54, 16.8, 18.2])
-
-            party.start() // start animating
-            party.addSmoke(Math.random() * document.getElementsByTagName('body')[0].getClientRects()[0].width,300,20)
-
-            setInterval(() => {
-                party.addSmoke(Math.random() * document.getElementsByTagName('body')[0].getClientRects()[0].width,300,20)
-            }, 1500);
-        });
-
     }
 }
