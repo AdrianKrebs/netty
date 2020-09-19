@@ -18,7 +18,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"triangle\"></ion-icon>\n      <ion-label>Tab 1</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\">\n      <ion-icon name=\"ellipse\"></ion-icon>\n      <ion-label>Tab 2</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"square\"></ion-icon>\n      <ion-label>Tab 3</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
+      __webpack_exports__["default"] = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"pulse-outline\"></ion-icon>\n      <ion-label>Measure</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\">\n      <ion-icon name=\"leaf-outline\"></ion-icon>\n      <ion-label>Reduce</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"partly-sunny-outline\"></ion-icon>\n      <ion-label>Offset</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
       /***/
     },
 
@@ -73,10 +73,10 @@
           path: 'tab1',
           loadChildren: function loadChildren() {
             return Promise.all(
-            /*! import() | tab1-tab1-module */
-            [__webpack_require__.e("common"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null,
-            /*! ../tab1/tab1.module */
-            "./src/app/tab1/tab1.module.ts")).then(function (m) {
+            /*! import() | measure-page-measure-module */
+            [__webpack_require__.e("common"), __webpack_require__.e("measure-page-measure-module")]).then(__webpack_require__.bind(null,
+            /*! ../measure-page/measure.module */
+            "./src/app/measure-page/measure.module.ts")).then(function (m) {
               return m.Tab1PageModule;
             });
           }
