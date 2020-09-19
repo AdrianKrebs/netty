@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ReductionService} from '../service/reduction.service';
 import {Transaction} from "../domain/transaction.model";
+import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'reduce-tab',
-  templateUrl: 'reduce.page.html',
-  styleUrls: ['reduce.page.scss']
+    selector: 'reduce-tab',
+    templateUrl: 'reduce.page.html',
+    styleUrls: ['reduce.page.scss']
 })
 export class ReducePage {
     public reductionTips: Observable<any>;
@@ -15,9 +16,19 @@ export class ReducePage {
     }
 
     ngOnInit(): void {
-        this.reductionTips = this.reductionService.fetchReductionTips();
+        this.reductionTips = this.reductionService.fetchReductionTips().pipe(map(arr => arr.sort(this.compare)));
     }
 
+
+    compare(a, b) {
+        if (a.proportion.percentage < b.proportion.percentage) {
+            return 1;
+        }
+        if (a.proportion.percentage > b.proportion.percentage) {
+            return -1;
+        }
+        return 0;
+    }
 
     icon(category) {
         switch (category) {
@@ -36,6 +47,9 @@ export class ReducePage {
         }
     }
 
+    gradient(tip) {
+        return `conic-gradient(#28ba62 calc(${tip.proportion.percentage}%), #cfff94 0%)`;
+    }
 
 
 }

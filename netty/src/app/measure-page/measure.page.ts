@@ -19,7 +19,6 @@ export class MeasurePage implements OnInit, AfterViewInit {
     public transactions$: Observable<Transaction[]>;
     public carbonTotal$: Observable<number>;
     public carbonTotalColor: Observable<any>;
-    public activeSegment = 'total';
 
     @ViewChild("myCanvas", {static: false}) myCanvas: ElementRef<HTMLCanvasElement>;
 
@@ -30,6 +29,8 @@ export class MeasurePage implements OnInit, AfterViewInit {
 
 
     ngOnInit(): void {
+        this.transactionService.fetchTransactions();
+
         this.transactions$ = this.transactionService.getTransactions();
         this.carbonTotal$ = this.transactionService.getCarbonTotal();
         this.carbonTotalColor = this.carbonTotal$.pipe(
@@ -71,23 +72,23 @@ export class MeasurePage implements OnInit, AfterViewInit {
 
     getLabelForScore(score: number) {
         if (score > 0.8) {
-            return "High"
+            return 'High';
         } else if (score > 0.6 && score <= 0.8) {
-            return "Medium"
+            return 'Medium';
         } else if (score <= 0.6) {
-            return "Low"
+            return 'Low';
         }
     }
 
     getColorForScore(carbon: number) {
-        if (carbon > 2500) {
-            return "danger"
-        } else if (carbon > 300) {
-            return "warning"
-        } else if (carbon < 100 && carbon > 10) {
-            return "secondary"
-        } else if (carbon < 10) {
-            return "success"
+        if (carbon > 600) {
+            return 'danger';
+        } else if (carbon > 150) {
+            return 'warning';
+        } else if (carbon < 150 && carbon > 50) {
+            return 'warning-low ';
+        } else if (carbon < 50) {
+            return 'success';
         }
     }
 

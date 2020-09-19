@@ -7,6 +7,208 @@ let ONESIGNAL_ACCESS_TOKEN = "ODhhZmM3Y2UtZDc0OS00Y2YyLWEwOTAtZGViOTU2M2I2ZmY5";
 let ONESIGNAL_APP_ID = "a950c90c-d6fa-4efe-8e7a-eb13bb8c036d";
 var router = express.Router();
 
+const transactionData = [
+    {
+        transactionId: 1,
+        date: "01.02.20",
+        text: "EAT.CH",
+        location: "ZURICH CH",
+        category: "Food",
+        price: "38.70",
+        carbon: 0.3,
+        score: 0.8,
+    },
+    {
+        transactionId: 2,
+        date: "02.02.20",
+        text: "Coop Pronto Dubendorf",
+        location: "Zurich CH",
+        category: "Groceries",
+        price: "12.25",
+        carbon: 0.2,
+        score: 0.7
+    },
+    {
+        transactionId: 3,
+        date: "05.02.20",
+        text: "SOCAR Buhlwiesen",
+        location: "Dubendorf CH",
+        category: "Car",
+        price: "58.20",
+        carbon: 65,
+        score: 0.9
+    },
+    {
+        transactionId: 3,
+        date: "24.02.20",
+        text: "Agrola Tankstelle",
+        location: "Bern CH",
+        category: "Car",
+        price: "65.20",
+        carbon: 100,
+        score: 0.9
+    },
+    {
+        transactionId: 5,
+        date: "16.02.20",
+        text: "Wild West Steakhouse TEXAS",
+        location: "Zurich CH",
+        category: "Food",
+        price: "84.5",
+        carbon: 36,
+        score: 0.9
+    },
+    {
+        transactionId: 4,
+        date: "08.02.20",
+        text: "IKEA Dt. NL Freiburg",
+        location: "Freiburg im B DE",
+        category: "Goods",
+        price: "212.20",
+        carbon: 4.2,
+        score: 0.85
+    },
+    {
+        transactionId: 5,
+        date: "09.02.20",
+        text: "Shamrock Irish Pub",
+        location: "Zurich CH",
+        category: "Food",
+        price: "15.20",
+        carbon: 0.2,
+        score: 0.3
+    },
+    {
+        transactionId: 6,
+        date: "11.02.20",
+        text: "Press & Books",
+        location: "Zuerich CH",
+        category: "Goods",
+        price: "15.20",
+        carbon: 0.2,
+        score: 0.85
+    },
+    {
+        transactionId: 6,
+        date: "31.02.20",
+        text: "EWZ Zurich",
+        location: "Zuerich CH",
+        category: "Home",
+        price: "148",
+        carbon: 102.5,
+        score: 0.85
+    },
+    {
+        transactionId: 3,
+        date: "24.02.20",
+        text: "Migrol Tankstelle",
+        location: "Zürich Orerlikon CH",
+        category: "Car",
+        price: "35.20",
+        carbon: 40,
+        score: 0.9
+    },
+    {
+        transactionId: 7,
+        date: "18.02.20",
+        text: "Lufthansa",
+        location: "Zurich CH",
+        category: "Flight",
+        price: "427.00",
+        carbon: 870,
+        score: 0.95
+    },
+    {
+        transactionId: 8,
+        date: "18.02.20",
+        text: "Europcar.com/de",
+        location: "Hamburg DE",
+        category: "Car",
+        price: "120.00",
+        carbon: 210,
+        score: 0.8
+    },
+    {
+        transactionId: 9,
+        date: "18.02.20",
+        text: "APPLE.COM/BILL",
+        location: "ITUNES.COM IE",
+        category: "Internet",
+        price: "1.50",
+        carbon: 0,
+        score: 0.8
+    },
+    {
+        transactionId: 10,
+        date: "23.02.20",
+        text: "DEICHMANN",
+        location: "München DE",
+        category: "Goods",
+        price: "55.20",
+        carbon: 8.5,
+        score: 0.75
+    }
+];
+
+const total = transactionData.reduce((a, b) => a + b.carbon, 0.0);
+
+function categoryCarbonPercentage(category) {
+    const totalCategory = transactionData.filter(t => t.category === category)
+        .reduce((a, b) => a + b.carbon, 0.0)
+
+    return totalCategory / total * 100.0;
+}
+
+function categoryCarbon(category) {
+    return transactionData.filter(t => t.category === category)
+        .reduce((a, b) => a + b.carbon, 0.0)
+}
+
+const reductionData = [
+    {
+        name: 'Purchase more efficient vehicle',
+        tonsSaved: categoryCarbon('Car'),
+        dollarsSaved: '686',
+        upfrontCosts: '30\'000',
+        proportion: {percentage: categoryCarbonPercentage('Car'), category: 'Car'}
+    },
+    {
+        name: 'Purchase electric vehicle',
+        tonsSaved: 4.3,
+        dollarsSaved: '922',
+        upfrontCosts: '30\'000',
+        proportion: {percentage: categoryCarbonPercentage('Car'), category: 'Car'}
+    },
+    {name: 'Work from home', tonsSaved: 1.2, dollarsSaved: '545', upfrontCosts: 0, proportion: {percentage:  categoryCarbonPercentage('Car'), category: 'Car'}},
+    {name: 'Carpool to work', tonsSaved: 0.9, dollarsSaved: '362', upfrontCosts: 0, proportion: {percentage:  categoryCarbonPercentage('Car'), category: 'Car'}},
+    {name: 'Reduce air travel', tonsSaved: 0.7, dollarsSaved: '102', upfrontCosts: 0, proportion: {percentage:  categoryCarbonPercentage('Flight'), category: 'Flight'}},
+    {name: 'Ride my bike', tonsSaved: 0.5, dollarsSaved: '165', upfrontCosts: 0, proportion: {percentage: categoryCarbonPercentage('Car'), category: 'Car'}},
+    {
+        name: 'Take public transportation',
+        tonsSaved: 0.4,
+        dollarsSaved: '165',
+        upfrontCosts: 0,
+        proportion: {percentage: categoryCarbonPercentage('Car'), category: 'Car'}
+    },
+    {name: 'Practice eco driving', tonsSaved: 0.4, dollarsSaved: '110', upfrontCosts: 0, proportion: {percentage: categoryCarbonPercentage('Car'), category: 'Car'}},
+    {name: 'Turn of lights', tonsSaved: 0.1, dollarsSaved: '46', upfrontCosts: 0, proportion: {percentage: categoryCarbonPercentage('Home'), category: 'Home'}},
+    {
+        name: 'Purchase high efficiency heating',
+        tonsSaved: 0.1,
+        dollarsSaved: '46',
+        upfrontCosts: 0,
+        proportion: {percentage: categoryCarbonPercentage('Home'), category: 'Home'}
+    },
+    {name: 'Reduce my waste', tonsSaved: 0.4, dollarsSaved: '17', upfrontCosts: 0, proportion: {percentage: categoryCarbonPercentage('Home'), category: 'Home'}},
+    {
+        name: 'Eat a low carbon diet',
+        tonsSaved: 0.7,
+        dollarsSaved: '419',
+        upfrontCosts: 0,
+        proportion: {percentage: categoryCarbonPercentage('Food'), category: 'Food'}
+    },
+];
+
 /* GET users listing. */
 router.get('/average', function (req, res, next) {
     res.json({emissions: 29, unit: 'tons/year'});
@@ -15,50 +217,8 @@ router.get('/average', function (req, res, next) {
 router.get('/reduction', function (req, res, next) {
 
 
-    res.json([
-        {
-            name: 'Purchase more efficient vehicle',
-            tonsSaved: 2.2,
-            dollarsSaved: '686',
-            upfrontCosts: 2000,
-            proportion: {percentage: 43, category: 'Car'}
-        },
-        {
-            name: 'Purchase electric vehicle',
-            tonsSaved: 4.3,
-            dollarsSaved: '922',
-            upfrontCosts: 15000,
-            proportion: {percentage: 43, category: 'Car'}
-        },
-        {name: 'Work from home', tonsSaved: 1.2, dollarsSaved: '545', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
-        {name: 'Carpool to work', tonsSaved: 0.9, dollarsSaved: '362', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
-        {name: 'Reduce air travel', tonsSaved: 0.7, dollarsSaved: '102', upfrontCosts: 0, proportion: {percentage: 22, category: 'Flight'}},
-        {name: 'Ride my bike', tonsSaved: 0.5, dollarsSaved: '165', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
-        {
-            name: 'Take public transportation',
-            tonsSaved: 0.4,
-            dollarsSaved: '165',
-            upfrontCosts: 0,
-            proportion: {percentage: 43, category: 'Car'}
-        },
-        {name: 'Practice eco driving', tonsSaved: 0.4, dollarsSaved: '110', upfrontCosts: 0, proportion: {percentage: 43, category: 'Car'}},
-        {name: 'Turn of lights', tonsSaved: 0.1, dollarsSaved: '46', upfrontCosts: 0, proportion: {percentage: 7, category: 'Home'}},
-        {
-            name: 'Purchase high efficiency heating',
-            tonsSaved: 0.1,
-            dollarsSaved: '46',
-            upfrontCosts: 0,
-            proportion: {percentage: 7, category: 'Home'}
-        },
-        {name: 'Reduce my waste', tonsSaved: 0.4, dollarsSaved: '17', upfrontCosts: 0, proportion: {percentage: 7, category: 'Home'}},
-        {
-            name: 'Eat a low carbon diet',
-            tonsSaved: 0.7,
-            dollarsSaved: '419',
-            upfrontCosts: 0,
-            proportion: {percentage: 7, category: 'Food'}
-        },
-    ]);
+
+    res.json(reductionData);
 });
 
 
@@ -84,8 +244,6 @@ router.post('/analyse-pdf', (req, res, next) => {
                 console.log(JSON.stringify(row));
             })
         })
-
-
     });
 
 
@@ -97,122 +255,9 @@ router.post('/analyse-pdf', (req, res, next) => {
 });
 
 
+
 router.get('/transaction-data', (req, res, next) => {
-    res.json([
-        {
-            transactionId: 1,
-            date: "01.02.20",
-            text: "EAT.CH",
-            location: "ZURICH CH",
-            category: "Food",
-            price: "38.70",
-            carbon: 0.3,
-            score: 0.8,
-        },
-        {
-            transactionId: 2,
-            date: "02.02.20",
-            text: "Coop Pronto Dubendorfer.",
-            location: "Zurich CH",
-            category: "Groceries",
-            price: "12.25",
-            carbon: 0.2,
-            score: 0.7
-        },
-        {
-            transactionId: 3,
-            date: "05.02.20",
-            text: "SOCAR Buhlwiesen",
-            location: "Dubendorf CH",
-            category: "Car",
-            price: "58.20",
-            carbon: 65,
-            score: 0.9
-        },
-        {
-            transactionId: 3,
-            date: "24.02.20",
-            text: "Agrola Tankstelle",
-            location: "Bern CH",
-            category: "Car",
-            price: "65.20",
-            carbon: 100,
-            score: 0.9
-        },
-        {
-            transactionId: 4,
-            date: "08.02.20",
-            text: "IKEA Dt. NL Freiburg",
-            location: "Freiburg im B DE",
-            category: "Goods",
-            price: "212.20",
-            carbon: 4.2,
-            score: 0.85
-        },
-        {
-            transactionId: 5,
-            date: "09.02.20",
-            text: "Shamrock Irish Pub",
-            location: "Zurich CH",
-            category: "Food",
-            price: "15.20",
-            carbon: 0.2,
-            score: 0.3
-        },
-        {
-            transactionId: 6,
-            date: "11.02.20",
-            text: "Press & Books",
-            location: "Zuerich CH",
-            category: "Goods",
-            price: "15.20",
-            carbon: 0.2,
-            score: 0.85
-        },
-        {
-            transactionId: 7,
-            date: "18.02.20",
-            text: "Thai Airways",
-            location: "Zurich CH",
-            category: "Flight",
-            price: "1002.00",
-            carbon: 870,
-            score: 0.95
-        },
-        {
-            transactionId: 8,
-            date: "18.02.20",
-            text: "Europcar.com/de",
-            location: "Hamburg DE",
-            category: "Car",
-            price: "120.00",
-            carbon: 210,
-            score: 0.8
-        },
-        {
-            transactionId: 9,
-            date: "18.02.20",
-            text: "APPLE.COM/BILL",
-            location: "ITUNES.COM IE",
-            category: "Internet",
-            price: "1.50",
-            carbon: 0,
-            score: 0.8
-        },
-        {
-            transactionId: 10,
-            date: "23.02.20",
-            text: "DEICHMANN",
-            location: "München DE",
-            category: "Goods",
-            price: "55.20",
-            carbon: 85,
-            score: 0.75
-        }
-
-
-    ])
-
+    res.json(transactionData)
 });
 
 let extractTransactionRowsFromPdf = function (data) {
