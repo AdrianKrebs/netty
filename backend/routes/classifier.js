@@ -1,6 +1,7 @@
 var express = require('express');
 let fs = require('fs'),
     PDFParser = require("pdf2json");
+var bodyParser = require('body-parser');
 
 var router = express.Router();
 
@@ -33,27 +34,26 @@ router.get('/reduction', function (req, res, next) {
 // multipart/form-data;
 router.post('/analyse-pdf', (req, res, next) => {
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
-    }
-    console.log(req.files); // the uploaded file object
     let pdfParser = new PDFParser();
-    fs.writeFileSync("transactions.pdf", req.files.file.data);
+    fs.writeFileSync("transactions.pdf", Buffer.from(req.body.data.toString('utf-8'), 'base64'));
     pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
     pdfParser.on("pdfParser_dataReady", pdfData => {
         fs.writeFileSync("parsedPdf.json", JSON.stringify(pdfData));
         const yOffset = 15.506;
         const pages = pdfData.formImage.Pages;
-        const texts = pages[1].Texts;
+        const texts = pages[1].Texts; // get through all pages
 
         //TODO read lines until next date appears
         // y between lines 0.638
         // y between line with separator 0.753
 
         const parsedPages = extractTransactionRowsFromPdf(pdfData.formImage);
-        parsedPages[1].forEach(row => {
-            console.log(JSON.stringify(row));
+        parsedPages.forEach(rows => {
+            rows.forEach(row => {
+                console.log(JSON.stringify(row));
+            })
         })
+
 
 
     });
@@ -115,7 +115,18 @@ router.get('/transaction-data', (req, res, next) => {
             price: "15.20",
             carbon: 0.2,
             score: 0.85
+        },
+        {
+            transactionId: 5,
+            date: "21.02.20",
+            text: "Shamrock Irish Pub",
+            location: "Zurich CH",
+            category: "Food",
+            price: "15.20",
+            carbon: 0.2,
+            score: 0.85
         }
+
 
     ])
 
