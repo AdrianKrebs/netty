@@ -32,6 +32,8 @@
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
+		<key>NSExtensionPointIdentifier</key>
+        <string>com.apple.share-services</string>
 	</dict>
 </dict>
 </plist>

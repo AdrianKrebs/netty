@@ -18,6 +18,7 @@
 		D57FF6592515560500571299 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57FF6582515560500571299 /* ShareViewController.swift */; };
 		D57FF65C2515560500571299 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57FF65A2515560500571299 /* MainInterface.storyboard */; };
 		D57FF6602515560500571299 /* Netty.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D57FF6562515560500571299 /* Netty.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D5D8394425168FB3003A146C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5D8394325168FB3003A146C /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		D57FF65D2515560500571299 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D57FF68B2515EBF100571299 /* Netty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Netty.entitlements; sourceTree = "<group>"; };
 		D57FF68E2515EC0F00571299 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		D5D8394325168FB3003A146C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 				D57FF6582515560500571299 /* ShareViewController.swift */,
 				D57FF65A2515560500571299 /* MainInterface.storyboard */,
 				D57FF65D2515560500571299 /* Info.plist */,
+				D5D8394325168FB3003A146C /* Media.xcassets */,
 			);
 			path = Netty;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D8394425168FB3003A146C /* Media.xcassets in Resources */,
 				D57FF65C2515560500571299 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,7 +464,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85X3WYU64X;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.netty.app;
@@ -481,7 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85X3WYU64X;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.netty.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -510,7 +514,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -532,7 +536,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
